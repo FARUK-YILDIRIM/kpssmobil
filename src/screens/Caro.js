@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, View, Dimensions} from 'react-native';
+import {StyleSheet, View, Dimensions, Alert} from 'react-native';
 import {
   Container,
   Header,
@@ -20,6 +20,7 @@ import Carousel from 'react-native-snap-carousel';
 import Spinner from 'react-native-loading-spinner-overlay';
 import Firebase from '../Firebase';
 import _ from 'lodash';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const caroWidth = Math.round(Dimensions.get('window').width);
 
@@ -40,7 +41,6 @@ export default class Caro extends Component {
       .equalTo('tr')
       .on('value', data => {
         const response = data.toJSON();
-        //console.log(response);
         this.setState({entries: _.toArray(response), spinner: false});
       });
   }
@@ -72,6 +72,11 @@ export default class Caro extends Component {
         </View>
       </Content>
     );
+  }
+
+  async saveKnowledge(key, data, next) {
+    await AsyncStorage.setItem(key, data);
+    next;
   }
 
   render() {
@@ -120,13 +125,25 @@ export default class Caro extends Component {
               </Button>
             </Left>
 
-            <Button transparent>
+            <Button
+              transparent
+              onPress={() => {
+                const valueKnowledge = this.state.entries[
+                  this._carousel.currentIndex
+                ]['knowledge'];
+                const keyuuid = this.state.entries[this._carousel.currentIndex][
+                  'uuid'
+                ];
+                this.saveKnowledge(keyuuid, valueKnowledge);
+                Alert.alert('Disket', 'Kayıt Başarılı...');
+              }}>
               <Icon name="ios-save" />
             </Button>
             <Right style={{paddingRight: 30}}>
               <Button
                 transparent
                 onPress={() => {
+                  console.log(this._carousel.currentIndex);
                   this._carousel.snapToNext();
                 }}>
                 <Icon name="ios-arrow-forward" />
