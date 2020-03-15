@@ -10,6 +10,8 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "firebase": "^7.11.0",
+    "lodash": "^4.17.15",
     "native-base": "^2.13.12",
     "react": "16.9.0",
     "react-native": "0.61.5",

@@ -18,6 +18,8 @@ import {
 import Icon from 'react-native-vector-icons/Ionicons';
 import Carousel from 'react-native-snap-carousel';
 import Spinner from 'react-native-loading-spinner-overlay';
+import Firebase from '../Firebase';
+import _ from 'lodash';
 
 const caroWidth = Math.round(Dimensions.get('window').width);
 
@@ -25,10 +27,22 @@ export default class Caro extends Component {
   constructor() {
     super();
     this.state = {
-      entries: ['a', 'b', 'c'],
-      spinner: false,
+      entries: [],
+      spinner: true,
     };
     console.disableYellowBox = true;
+  }
+
+  componentDidMount() {
+    Firebase.database()
+      .ref('notes')
+      .orderByChild('lesson')
+      .equalTo('tr')
+      .on('value', data => {
+        const response = data.toJSON();
+        //console.log(response);
+        this.setState({entries: _.toArray(response), spinner: false});
+      });
   }
 
   _renderItem({item, index}) {
@@ -38,7 +52,7 @@ export default class Caro extends Component {
           <Card>
             <CardItem>
               <Body>
-                <Text>Bilgi</Text>
+                <Text>{item.knowledge}</Text>
               </Body>
             </CardItem>
             <CardItem footer>
@@ -54,7 +68,7 @@ export default class Caro extends Component {
             alignItems: 'center',
             marginTop: 30,
           }}>
-          <Text style={{fontSize: 12}}>Yazar: User ❤️ </Text>
+          <Text style={{fontSize: 12}}>Yazar: {item.user} ❤️ </Text>
         </View>
       </Content>
     );
