@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
-import Caro from './src/screens/Caro';
+import Router from './src/Router';
 
 export default class App extends Component {
   render() {
-    return <Caro />;
+    return <Router />;
   }
 }

@@ -12,8 +12,6 @@ import {
   CardItem,
   Text,
   Body,
-  Footer,
-  FooterTab,
 } from 'native-base';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Carousel from 'react-native-snap-carousel';
@@ -150,22 +148,6 @@ export default class Caro extends Component {
               </Button>
             </Right>
           </View>
-          <Footer transparent style={styles.footer}>
-            <FooterTab>
-              <Button>
-                <Text>Menu</Text>
-              </Button>
-              <Button>
-                <Text>Menu</Text>
-              </Button>
-              <Button active>
-                <Text>Menu</Text>
-              </Button>
-              <Button>
-                <Text>Menu</Text>
-              </Button>
-            </FooterTab>
-          </Footer>
         </Container>
       </React.Fragment>
     );
