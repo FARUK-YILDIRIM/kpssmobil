@@ -19,7 +19,6 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import Firebase from '../Firebase';
 import _ from 'lodash';
 import AsyncStorage from '@react-native-community/async-storage';
-
 const caroWidth = Math.round(Dimensions.get('window').width);
 
 export default class Caro extends Component {
@@ -33,10 +32,11 @@ export default class Caro extends Component {
   }
 
   componentDidMount() {
+    let lessonCode = this.props.route.params['lessonCode'];
     Firebase.database()
       .ref('notes')
       .orderByChild('lesson')
-      .equalTo('tr')
+      .equalTo(lessonCode)
       .on('value', data => {
         const response = data.toJSON();
         this.setState({entries: _.toArray(response), spinner: false});
@@ -88,7 +88,9 @@ export default class Caro extends Component {
         <Container style={styles.container}>
           <Header>
             <Left>
-              <Button transparent>
+              <Button
+                transparent
+                onPress={() => this.props.navigation.goBack()}>
                 <Icon name="ios-arrow-back" />
               </Button>
             </Left>

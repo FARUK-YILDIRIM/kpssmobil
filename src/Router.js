@@ -1,22 +1,21 @@
 import * as React from 'react';
 import {Text, View} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 
+//Navigation
+import {NavigationContainer} from '@react-navigation/native';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
 //Screens
+import Home from './screens/Home';
 import Caro from './screens/Caro';
 
-function HomeScreen() {
-  return (
-    <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-      <Text>Home!</Text>
-    </View>
-  );
+function HomeScreen({navigation}) {
+  return <Home navigation={navigation} />;
 }
 
-function CaroScreen() {
-  return <Caro />;
+function CaroScreen({navigation, route}) {
+  return <Caro navigation={navigation} route={route} />;
 }
 
 const Tab = createBottomTabNavigator();
