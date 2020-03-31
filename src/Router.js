@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 //Navigation
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import {createStackNavigator} from '@react-navigation/stack';
 
 //Screens
 import Home from './screens/Home';
@@ -19,6 +20,20 @@ function CaroScreen({navigation, route}) {
 }
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
+
+function Root() {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Dersler" component={HomeScreen} />
+      <Stack.Screen
+        name="Caro"
+        component={CaroScreen}
+        options={({route}) => ({title: route.params['title']})}
+      />
+    </Stack.Navigator>
+  );
+}
 
 export default function App() {
   return (
@@ -28,7 +43,7 @@ export default function App() {
           tabBarIcon: ({focused, color, size}) => {
             let iconName;
 
-            if (route.name === 'Home') {
+            if (route.name === 'Dersler') {
               iconName = focused
                 ? 'ios-book'
                 : 'ios-information-circle-outline';
@@ -44,8 +59,7 @@ export default function App() {
           activeTintColor: 'tomato',
           inactiveTintColor: 'gray',
         }}>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Caro" component={CaroScreen} />
+        <Tab.Screen name="Dersler" component={Root} />
       </Tab.Navigator>
     </NavigationContainer>
   );

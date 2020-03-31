@@ -2,9 +2,7 @@ import React, {Component} from 'react';
 import {StyleSheet, View, Dimensions, Alert} from 'react-native';
 import {
   Container,
-  Header,
   Left,
-  Title,
   Right,
   Button,
   Content,
@@ -32,11 +30,10 @@ export default class Caro extends Component {
   }
 
   componentDidMount() {
-    let lessonCode = this.props.route.params['lessonCode'];
     Firebase.database()
       .ref('notes')
       .orderByChild('lesson')
-      .equalTo(lessonCode)
+      .equalTo(this.props.route.params['lessonCode'])
       .on('value', data => {
         const response = data.toJSON();
         this.setState({entries: _.toArray(response), spinner: false});
@@ -86,23 +83,6 @@ export default class Caro extends Component {
           textStyle={styles.spinnerTextStyle}
         />
         <Container style={styles.container}>
-          <Header>
-            <Left>
-              <Button
-                transparent
-                onPress={() => this.props.navigation.goBack()}>
-                <Icon name="ios-arrow-back" />
-              </Button>
-            </Left>
-            <Body>
-              <Title>Türkçe</Title>
-            </Body>
-            <Right>
-              <Button transparent>
-                <Icon name={Platform.OS === 'ios' ? 'ios-mail' : 'md-mail'} />
-              </Button>
-            </Right>
-          </Header>
           <Carousel
             ref={c => {
               this._carousel = c;
@@ -121,7 +101,7 @@ export default class Caro extends Component {
                 onPress={() => {
                   this._carousel.snapToPrev();
                 }}>
-                <Icon name="ios-arrow-back" />
+                <Icon size={20} name="ios-arrow-back" />
               </Button>
             </Left>
 
@@ -137,7 +117,7 @@ export default class Caro extends Component {
                 this.saveKnowledge(keyuuid, valueKnowledge);
                 Alert.alert('Disket', 'Kayıt Başarılı...');
               }}>
-              <Icon name="ios-save" />
+              <Icon size={20} name="ios-save" />
             </Button>
             <Right style={{paddingRight: 30}}>
               <Button
@@ -146,7 +126,7 @@ export default class Caro extends Component {
                   console.log(this._carousel.currentIndex);
                   this._carousel.snapToNext();
                 }}>
-                <Icon name="ios-arrow-forward" />
+                <Icon size={20} name="ios-arrow-forward" />
               </Button>
             </Right>
           </View>

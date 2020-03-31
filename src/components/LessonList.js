@@ -8,6 +8,7 @@ export default class LessonList extends Component {
         onPress={() =>
           this.props.navigation.navigate(this.props.lesson, {
             lessonCode: this.props.lessonCode,
+            title: this.props.title,
           })
         }>
         <Card>

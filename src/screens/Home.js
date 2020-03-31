@@ -9,11 +9,6 @@ export default class Home extends Component {
     return (
       <Container>
         <Content>
-          <Header>
-            <Body>
-              <Title>Dersler</Title>
-            </Body>
-          </Header>
           <View style={{flex: 1}}>
             <LessonList
               navigation={this.props.navigation}
@@ -23,6 +18,15 @@ export default class Home extends Component {
               title={'Matematik'}
               lesson={'Caro'}
               lessonCode={'mat'}
+            />
+            <LessonList
+              navigation={this.props.navigation}
+              image={{
+                uri: '',
+              }}
+              title={'Türkçe'}
+              lesson={'Caro'}
+              lessonCode={'tr'}
             />
           </View>
         </Content>
