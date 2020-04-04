@@ -32,6 +32,7 @@ export default class Save extends Component {
 
   componentDidMount() {
     this.allData();
+    this.props.navigation.addListener('focus', this.allData);
   }
 
   allData = async () => {
