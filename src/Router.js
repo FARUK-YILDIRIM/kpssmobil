@@ -10,6 +10,7 @@ import {createStackNavigator} from '@react-navigation/stack';
 //Screens
 import Home from './screens/Home';
 import Caro from './screens/Caro';
+import Save from './screens/Save';
 
 function HomeScreen({navigation}) {
   return <Home navigation={navigation} />;
@@ -17,6 +18,10 @@ function HomeScreen({navigation}) {
 
 function CaroScreen({navigation, route}) {
   return <Caro navigation={navigation} route={route} />;
+}
+
+function SaveScreen({navigation, route}) {
+  return <Save navigation={navigation} route={route} />;
 }
 
 const Tab = createBottomTabNavigator();
@@ -47,8 +52,8 @@ export default function App() {
               iconName = focused
                 ? 'ios-book'
                 : 'ios-information-circle-outline';
-            } else if (route.name === 'Caro') {
-              iconName = focused ? 'ios-list-box' : 'ios-list';
+            } else if (route.name === 'Kaydedilenler') {
+              iconName = focused ? 'ios-list-box' : 'ios-save';
             }
 
             // You can return any component that you like here!
@@ -60,6 +65,7 @@ export default function App() {
           inactiveTintColor: 'gray',
         }}>
         <Tab.Screen name="Dersler" component={Root} />
+        <Tab.Screen name="Kaydedilenler" component={SaveScreen} />
       </Tab.Navigator>
     </NavigationContainer>
   );
