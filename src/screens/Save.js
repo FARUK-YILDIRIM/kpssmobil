@@ -18,6 +18,8 @@ import Carousel from 'react-native-snap-carousel';
 import Spinner from 'react-native-loading-spinner-overlay';
 import _ from 'lodash';
 import AsyncStorage from '@react-native-community/async-storage';
+import SharePost from '../components/Share';
+
 const caroWidth = Math.round(Dimensions.get('window').width);
 
 export default class Save extends Component {
@@ -63,9 +65,7 @@ export default class Save extends Component {
               </Body>
             </CardItem>
             <CardItem footer>
-              <Button transparent>
-                <Text>Paylaş</Text>
-              </Button>
+              <SharePost knowledge={item[1]} />
             </CardItem>
           </Card>
         </View>

@@ -17,6 +17,8 @@ import Spinner from 'react-native-loading-spinner-overlay';
 import Firebase from '../Firebase';
 import _ from 'lodash';
 import AsyncStorage from '@react-native-community/async-storage';
+import SharePost from '../components/Share';
+
 const caroWidth = Math.round(Dimensions.get('window').width);
 
 export default class Caro extends Component {
@@ -52,7 +54,7 @@ export default class Caro extends Component {
             </CardItem>
             <CardItem footer>
               <Button transparent>
-                <Text>Paylaş</Text>
+                <SharePost knowledge={item.knowledge} />
               </Button>
             </CardItem>
           </Card>
@@ -142,7 +144,6 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flexDirection: 'row',
-    //justifyContent: 'center',
     marginBottom: 40,
   },
   footer: {
