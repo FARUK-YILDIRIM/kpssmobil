@@ -17,7 +17,7 @@ export default class LessonList extends Component {
               <Col>
                 <Image
                   source={this.props.image}
-                  style={{height: 100, width: null}}
+                  style={{height: 100, width: 100}}
                 />
               </Col>
               <Col>
@@ -35,6 +35,8 @@ const styles = {
   text: {
     textAlign: 'center',
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 18,
+    padding: 30,
+    width: 200,
   },
 };
